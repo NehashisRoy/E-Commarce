@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./component/Header/Header";
+import Home from "./component/Home/Home";
+import Checkout from "./component/Checkout/Checkout";
 
 function App() {
+  const [searchProduct, setSearchProduct] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <BrowserRouter>
+        <Header
+          searchProduct={searchProduct}
+          setSearchProduct={setSearchProduct}
+        />
+        <Routes>
+          <Route path="/" element={<Home searchProduct={searchProduct} />} />
+          <Route path="/checkout" element={<Checkout />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
